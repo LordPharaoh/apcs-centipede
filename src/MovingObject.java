@@ -5,4 +5,5 @@ public interface MovingObject {
 
 	void move();
 	Rectangle getBoundingRect();
+	boolean collision(Rectangle r);
 }
