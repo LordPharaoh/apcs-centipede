@@ -1,3 +1,5 @@
+# Plan for implementation
+## Interfaces
 MovingObject = move, detectCollision, getBoundingRect
 - Mushroom
 	- Health
@@ -13,6 +15,7 @@ OtherThings
 - Timer
 - High score
 
+## Collisions
 | Primary Object | Secondary Object | Behavior |
 | -------------- | ---------------- | -------- |
 | Spider         | Mushroom         | nothing  |
