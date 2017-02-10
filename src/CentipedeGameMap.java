@@ -7,7 +7,7 @@ public class CentipedeGameMap extends GameMap {
 	
 	public CentipedeGameMap(Dimension dim) {
 		//TODO open with dimensions
-		add(new Mushroom(Math.random()*100, 0));
+		add(new Mushroom(new Vector((int)Math.random()*100, 0)));
 		
 	}
 	
