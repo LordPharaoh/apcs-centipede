@@ -7,4 +7,5 @@ public interface MovingObject {
 	Rectangle getBoundingRect();
 	Vector getLocation();
 	boolean collision(Rectangle r);
+	void handleCollision(MovingObject m);
 }
