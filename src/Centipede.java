@@ -1,3 +1,6 @@
+import java.awt.Graphics;
+import java.awt.Rectangle;
+
 
 public class Centipede implements MovingObject, Drawable {
 
@@ -10,19 +13,33 @@ public class Centipede implements MovingObject, Drawable {
 	
 	}
 	
-	public void getLocation() {
+	@Override
+	public void draw(Graphics g) {
+		// TODO Auto-generated method stub
 		
 	}
-	
-	public void detectCollision() {
-		
+
+	@Override
+	public Rectangle getBoundingRect() {
+		// TODO Auto-generated method stub
+		return null;
 	}
-	
-	public void handleCollision() {
-		
+
+	@Override
+	public Vector getLocation() {
+		// TODO Auto-generated method stub
+		return null;
 	}
-	
-	public void draw() {
+
+	@Override
+	public boolean collision(Rectangle r) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void handleCollision(MovingObject m) {
+		// TODO Auto-generated method stub
 		
 	}
 }
