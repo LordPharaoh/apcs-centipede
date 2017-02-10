@@ -1,10 +1,12 @@
+import java.awt.Graphics;
 import java.awt.Rectangle;
 
 
-public class Mushroom implements MovingObject {
+public class Mushroom implements MovingObject, Drawable {
 	//TODO actual values
 	public static final int MUSHROOM_WIDTH = 50;
 	public static final int MUSHROOM_HEIGHT = 50;
+	private Vector location;
 	public Mushroom(Vector v) {
 		//Make a mushroom
 		
@@ -20,19 +22,29 @@ public class Mushroom implements MovingObject {
 
 	@Override
 	public Rectangle getBoundingRect() {
-		// TODO Auto-generated method stub
+		// TODO Return hitbox, implement
 		return null;
 	}
 
 	@Override
 	public boolean collision(Rectangle r) {
-		// TODO Auto-generated method stub
+		// TODO Implement, return true if hitboxes overlap
 		return false;
 	}
 
 	@Override
 	public Vector getLocation() {
-		// TODO Auto-generated method stub
-		return null;
+		return location;
+	}
+
+	@Override
+	public void handleCollision(MovingObject m) {
+		// TODO Handle collissions, look at chart on github
+		
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		
 	}
 }

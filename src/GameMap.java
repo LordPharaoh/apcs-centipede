@@ -6,11 +6,13 @@ import java.util.List;
 
 public abstract class GameMap {
 
-	private List<MovingObject> movers;
+	protected List<MovingObject> movers;
+	protected List<Drawable> drawers;
 	Image backgroundImage;
 	
 	public GameMap() {
-		movers = new ArrayList();
+		movers = new ArrayList<MovingObject>();
+		drawers = new ArrayList<Drawable>();
 		openBackgroundImage();
 	}
 
@@ -19,8 +21,11 @@ public abstract class GameMap {
 	public abstract void tick();
 	public abstract void draw(Graphics g);
 
-	public void add(MovingObject go) {
+	public void addMover(MovingObject go) {
 		movers.add(go);
+	}
+	public void addDrawer(Drawable d) {
+		drawers.add(d);
 	}
 
 }
