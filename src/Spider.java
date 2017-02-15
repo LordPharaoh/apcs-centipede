@@ -1,5 +1,8 @@
+import java.awt.Graphics;
+import java.awt.Rectangle;
 
-public class Spider implements MovingObject, Drawable{
+
+public class Spider implements MovingObject, Drawable {
 	
 	
 	
@@ -27,11 +30,43 @@ public class Spider implements MovingObject, Drawable{
 	
 	
 	@Override
-	public void draw() {
+	public void draw(Graphics g) {
 		/**
 		 * 
 		 */
 
+	}
+
+
+
+	@Override
+	public Rectangle getBoundingRect() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public Vector getLocation() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public boolean collision(Rectangle r) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+	@Override
+	public void handleCollision(MovingObject m) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

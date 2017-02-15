@@ -7,8 +7,9 @@ public class CentipedeGameMap extends GameMap {
 	
 	public CentipedeGameMap(Dimension dim) {
 		//TODO open with dimensions
-		add(new Mushroom(new Vector((int)Math.random()*100, 0)));
-		
+		Mushroom m = new Mushroom(new Vector((int)Math.random()*100, 0));
+		addDrawer(m);
+		addMover(m);
 	}
 	
 	public CentipedeGameMap() {
@@ -24,13 +25,17 @@ public class CentipedeGameMap extends GameMap {
 	@Override
 	public void tick() {
 		// TODO Auto-generated method stub
-		
+		for(MovingObject mo : movers) {
+			mo.move();
+		}
 	}
 
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
-		
+		for(Drawable d : drawers) {
+			d.draw(g);
+		}
 	}
 
 }

@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 import java.awt.Rectangle;
+=======
+import java.awt.Graphics;
+import java.awt.Rectangle;
+
+>>>>>>> b0c070e7119a92390580f5428890822a742db8a2
 
 
 public class Centipede implements Drawable, MovingObject {
@@ -12,24 +18,37 @@ public class Centipede implements Drawable, MovingObject {
 
 	@Override
 	public void move() {
+<<<<<<< HEAD
 		/**
 		 * Should move horizontally until it comes into contact with the east/west 
 		 * wall, another Centipede piece, or a Mushroom. When it comes into 
 		 * contact (collides) with one of those it should move down one vertical unit.
 		 */
+=======
+	
+	}
+	
+	@Override
+	public void draw(Graphics g) {
+		// TODO Auto-generated method stub
+>>>>>>> b0c070e7119a92390580f5428890822a742db8a2
 		
 	}
 
 	@Override
 	public Rectangle getBoundingRect() {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 		/**
 		 * Gives hitbox
 		 */
+=======
+>>>>>>> b0c070e7119a92390580f5428890822a742db8a2
 		return null;
 	}
 
 	@Override
+<<<<<<< HEAD
 	public boolean collision(Rectangle r) {
 		// TODO Auto-generated method stub
 		/**
@@ -68,6 +87,22 @@ public class Centipede implements Drawable, MovingObject {
 		/**
 		 * Displays sprite
 		 */
+=======
+	public Vector getLocation() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean collision(Rectangle r) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void handleCollision(MovingObject m) {
+		// TODO Auto-generated method stub
+>>>>>>> b0c070e7119a92390580f5428890822a742db8a2
 		
 	}
 }
