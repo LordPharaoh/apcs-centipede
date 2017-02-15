@@ -4,12 +4,15 @@ import java.awt.Graphics;
 
 public class CentipedeGameMap extends GameMap {
 
+	//TODO implement scale
+	public static double scale = 1;
 	
 	public CentipedeGameMap(Dimension dim) {
 		//TODO open with dimensions
 		Mushroom m = new Mushroom(new Vector((int)Math.random()*100, 0));
-		addDrawer(m);
-		addMover(m);
+		Centipede c = new Centipede(new Vector((int)Math.random()*100, 0));
+		add(m);
+		add(c);
 	}
 	
 	public CentipedeGameMap() {
@@ -24,7 +27,6 @@ public class CentipedeGameMap extends GameMap {
 
 	@Override
 	public void tick() {
-		// TODO Auto-generated method stub
 		for(MovingObject mo : movers) {
 			mo.move();
 		}
@@ -32,7 +34,7 @@ public class CentipedeGameMap extends GameMap {
 
 	@Override
 	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
+		// TODO affinetransform to scale with window size
 		for(Drawable d : drawers) {
 			d.draw(g);
 		}

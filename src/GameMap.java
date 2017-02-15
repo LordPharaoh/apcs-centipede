@@ -27,5 +27,13 @@ public abstract class GameMap {
 	public void addDrawer(Drawable d) {
 		drawers.add(d);
 	}
+	public void add(Object d) {
+		if(d instanceof Drawable) {
+			drawers.add((Drawable) d);
+		}
+		if(d instanceof MovingObject){
+			movers.add((MovingObject) d);
+		}
+	}
 
 }
