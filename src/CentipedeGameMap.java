@@ -6,13 +6,25 @@ public class CentipedeGameMap extends GameMap {
 
 	//TODO implement scale
 	public static double scale = 1;
+	public void makeMushrooms(int n) {
+		for(int i = 0; i < n; i++) {
+			Mushroom m = new Mushroom(new Vector((int)Math.random()*100, 0));
+			add(m);
+		}
+	}
+	public void makeCentipede(int numSegments, int xVal) {
+		for(int i = 0; i < numSegments; i++) {
+			Centipede c = new Centipede(new Vector(xVal, -(i * Centipede.HEIGHT)));
+			add(c);
+		}
+	}
 	
 	public CentipedeGameMap(Dimension dim) {
 		//TODO open with dimensions
-		Mushroom m = new Mushroom(new Vector((int)Math.random()*100, 0));
-		Centipede c = new Centipede(new Vector((int)Math.random()*100, 0));
-		add(m);
-		add(c);
+		makeMushrooms(100);
+		makeCentipede(20, 100);
+		Spider s = new Spider(new Vector(100, 100));
+
 	}
 	
 	public CentipedeGameMap() {

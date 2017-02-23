@@ -19,7 +19,7 @@ public class Centipede implements Drawable, MovingObject {
 	public Centipede(Vector v) {
 		location = v;
 		direction = DOWN;
-		speed = 10;
+		speed = 5;
 		nextTurn = RIGHT;
 	}
 	@Override
@@ -29,6 +29,10 @@ public class Centipede implements Drawable, MovingObject {
 		 * wall, another Centipede piece, or a Mushroom. When it comes into 
 		 * contact (collides) with one of those it should move down one vertical unit.
 		 */
+		if(location.y < 0) {
+			location = location.add(new Vector(0, speed));
+			return;
+		}
 		Vector dir;
 		int scaledSpeed = speed;
 		switch(direction) {
@@ -58,6 +62,7 @@ public class Centipede implements Drawable, MovingObject {
 				dir = new Vector(0, 0);
 				break;
 		}
+		
 		location = location.add(dir);
 	}
 	
