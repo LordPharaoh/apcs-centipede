@@ -8,9 +8,11 @@ public class Spider implements MovingObject, Drawable{
 	//TODO actual values
 	public static final int SPIDER_WIDTH = 100;
 	public static final int SPIDER_HEIGHT = 50;
+	public static final int SPIDER_BOUNDARY = 200;
 	private int x, y;
 	private Vector location;
-
+	private boolean up;
+	private boolean left;
 
 	public Spider (Vector v){
 		// TODO
@@ -28,23 +30,28 @@ public class Spider implements MovingObject, Drawable{
 
 		int movex = (int) (Math.random()*10);
 		int movey = (int) (Math.random()*10);
-		int random = (int) (Math.random()*2);
 
 
-		if(random == 0){
-			x = x + movex;
-			if(y + movey < 200){
+		if(up == true){
+			if(y + movey < SPIDER_BOUNDARY){
 				y = y + movey;
 			}
 			else{
-				y = 200;
+				y = SPIDER_BOUNDARY;
 			}
 		}
 		else{
-			x = x - movex;
 			y = y - movey;
 			
 		}
+		
+		if(left == true){
+			x = x + movex;
+		}
+		else{
+			x = x - movex;
+		}
+		
 		
 
 
