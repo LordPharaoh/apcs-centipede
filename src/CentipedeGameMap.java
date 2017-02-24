@@ -8,7 +8,12 @@ public class CentipedeGameMap extends GameMap {
 	public static double scale = 1;
 	public void makeMushrooms(int n) {
 		for(int i = 0; i < n; i++) {
-			Mushroom m = new Mushroom(new Vector((int)Math.random()*100, 0));
+			Mushroom m = new Mushroom(
+					new Vector(
+							(int)(Math.random() * MovingObjectsGameLauncher.DEFAULT_SIZE), 
+							(int)(Math.random() * MovingObjectsGameLauncher.DEFAULT_SIZE)
+					)
+			);
 			add(m);
 		}
 	}
@@ -18,12 +23,11 @@ public class CentipedeGameMap extends GameMap {
 			add(c);
 		}
 	}
-	
+		
 	public CentipedeGameMap(Dimension dim) {
 		//TODO open with dimensions
-		makeMushrooms(100);
-		makeCentipede(20, 100);
-		Spider s = new Spider(new Vector(100, 100));
+		makeMushrooms(20);
+		makeCentipede(20, 600);
 
 	}
 	
@@ -36,12 +40,29 @@ public class CentipedeGameMap extends GameMap {
 		// TODO Open the background image
 		
 	}
-
-	@Override
-	public void tick() {
+	
+	public void collisions() {
+		//TODO add box optimization
+		//TODO skip types that don't react? is instanceof more efficient?
+		for(int i = 0; i < movers.size(); i++) {
+			for(int h = i + 1; h < movers.size(); h++) {
+				if(movers.get(i).collision(movers.get(h))) {
+					movers.get(i).handleCollision(movers.get(h));
+					movers.get(h).handleCollision(movers.get(i));
+				}
+			}
+		}
+	}
+	public void moveAll() {
 		for(MovingObject mo : movers) {
 			mo.move();
 		}
+	}
+
+	@Override
+	public void tick() {
+		collisions();
+		moveAll();
 	}
 
 	@Override

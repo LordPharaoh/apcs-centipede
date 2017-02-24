@@ -44,7 +44,7 @@ public abstract class Bullet implements MovingObject, Drawable {
 	}
 	
 	@Override
-	public boolean collision(Rectangle r) {
+	public boolean collision(MovingObject r) {
 		// TODO Auto-generated method stub
 		return hitObj;
 	}

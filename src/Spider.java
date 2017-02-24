@@ -61,7 +61,7 @@ public class Spider implements MovingObject, Drawable{
 
 	}
 
-	public boolean collision(Rectangle r) {
+	public boolean collision(MovingObject r) {
 		return false;
 		/**
 		 * returns true if collision occurs

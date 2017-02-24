@@ -94,22 +94,20 @@ public class Centipede implements Drawable, MovingObject {
 		/**
 		 * Gives hitbox
 		 */
-		return null;
+		
+		return new Rectangle(location.x, location.y, WIDTH, HEIGHT);
 	}
 	
 	@Override
-	public boolean collision(Rectangle r) {
+	public boolean collision(MovingObject r) {
 		// TODO Auto-generated method stub
 		/**
 		 * Checks if hitbox overlaps with any other hitboxes
 		 */
-	
-		return false;
+		if(r == null) return false;
+		return (getBoundingRect()).intersects(r.getBoundingRect());
 	}
 
-	void handleCollision(Mushroom m) {
-		
-	}
 	@Override
 	public void handleCollision(MovingObject m) {
 		// TODO Auto-generated method stub
@@ -121,6 +119,10 @@ public class Centipede implements Drawable, MovingObject {
 		 * Contact with another Centipede -> Move down 1 Vertical unit + Change Direction
 		 * Contact with Bullet -> Delete section, Spawn Mushroom at location
 		 */
+		if(m instanceof Mushroom) {
+			changeDirection(DOWN);
+		}
+
 		
 	}
 
