@@ -21,8 +21,9 @@ public abstract class GameMap {
 	public abstract void tick();
 	public abstract void draw(Graphics g);
 	
-	public void removeObject(MovingObject o){
-		drawers.remove(o);
+	public void removeObject(MovingObject m){
+		drawers.remove(m);
+		movers.remove(m);
 	}
 
 	public void addMover(MovingObject go) {
