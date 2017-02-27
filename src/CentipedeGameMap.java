@@ -11,8 +11,11 @@ public class CentipedeGameMap extends GameMap {
 		//TODO open with dimensions
 		Mushroom m = new Mushroom(new Vector((int)Math.random()*100, 0));
 		Centipede c = new Centipede(new Vector((int)Math.random()*100, 0));
+		
 		add(m);
 		add(c);
+	
+	
 	}
 	
 	public CentipedeGameMap() {
