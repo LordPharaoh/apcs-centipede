@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.awt.Rectangle;
 
 
@@ -8,4 +9,6 @@ public interface MovingObject {
 	Vector getLocation();
 	boolean collision(Rectangle r);
 	void handleCollision(MovingObject m);
+	void draw(Graphics g);
+	
 }
