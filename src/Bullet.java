@@ -3,7 +3,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 
-public abstract class Bullet implements MovingObject, Drawable {
+public class Bullet implements MovingObject, Drawable {
 	//TODO actual values
 	private int x, y;
 	public static final int BULLET_WIDTH = 2;
@@ -12,9 +12,9 @@ public abstract class Bullet implements MovingObject, Drawable {
 	private boolean hitObj;
 	private Vector location;
 	
-	public Bullet(int x, int y){
-		this.x = x;
-		this.y = y;
+	public Bullet(Vector v){
+		this.x = v.x;
+		this.y = v.y;
 		
 	}
 	
@@ -47,6 +47,13 @@ public abstract class Bullet implements MovingObject, Drawable {
 	public boolean collision(Rectangle r) {
 		// TODO Auto-generated method stub
 		return hitObj;
+	}
+
+
+	@Override
+	public Rectangle getBoundingRect() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

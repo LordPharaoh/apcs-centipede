@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
@@ -8,11 +9,13 @@ public class Spider implements MovingObject, Drawable{
 	//TODO actual values
 	public static final int SPIDER_WIDTH = 100;
 	public static final int SPIDER_HEIGHT = 50;
-	public static final int SPIDER_BOUNDARY = 200;
+	public static final int SPIDER_BOUNDARY = 500;
+	public static final int MOVEX = 4;
+	public static final int MOVEY = 5;
 	private int x, y;
 	private Vector location;
-	private boolean up;
-	private boolean left;
+	private boolean up, left;
+
 
 	public Spider (Vector v){
 		// TODO
@@ -28,31 +31,34 @@ public class Spider implements MovingObject, Drawable{
 		x = location.x;
 		y = location.y;
 
-		int movex = (int) (Math.random()*10);
-		int movey = (int) (Math.random()*10);
-
-
+		if(y >= MovingObjectsGameLauncher.DEFAULT_SIZE - 100){
+			changeDirection();
+		}
+		else if(y - MOVEY < SPIDER_BOUNDARY){
+			changeDirection();
+		}
+		
+		else if(Math.random() > .96){
+			changeDirection();
+		}
+		
+		
 		if(up == true){
-			if(y + movey < SPIDER_BOUNDARY){
-				y = y + movey;
-			}
-			else{
-				y = SPIDER_BOUNDARY;
-			}
+			y = y - MOVEY;
 		}
 		else{
-			y = y - movey;
-			
+			y = y + MOVEY;
+
 		}
-		
-		if(left == true){
-			x = x + movex;
+
+		if(left == false){
+			x = x + MOVEX;
 		}
 		else{
-			x = x - movex;
+			x = x - MOVEX;
 		}
-		
-		
+
+		location = new Vector(x , y);
 
 
 		/**
@@ -60,6 +66,16 @@ public class Spider implements MovingObject, Drawable{
 		 */
 
 	}
+
+	private void changeDirection() {
+		// TODO Auto-generated method stub
+			if(up == false)
+				up = true;
+			else
+				up = false;
+	}
+
+
 
 	public boolean collision(Rectangle r) {
 		return false;
@@ -91,7 +107,8 @@ public class Spider implements MovingObject, Drawable{
 
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
-
+		g.setColor(new Color(255, 0, 0));
+		g.drawOval(this.location.x, this.location.y, SPIDER_WIDTH, SPIDER_HEIGHT);
 	}
 
 
@@ -99,7 +116,10 @@ public class Spider implements MovingObject, Drawable{
 	@Override
 	public void handleCollision(MovingObject m) {
 		// TODO Auto-generated method stub
-
+		if (m instanceof Player || m instanceof Bullet){
+			
+			
+		}
 		/**
 		 * Hits Mushroom, does nothing, continues to move
 		 * Hits Player, deletes

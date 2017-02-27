@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 
 
 public class MovingObjectsGameLauncher {
-	public static final int DEFAULT_SIZE = 1000;
+	public static final int DEFAULT_SIZE = 800;
 	public static void main(String[] args) {
 		JFrame gameFrame = new JFrame();
 		gameFrame.setSize(DEFAULT_SIZE, DEFAULT_SIZE);

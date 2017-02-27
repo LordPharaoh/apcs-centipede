@@ -36,4 +36,16 @@ public abstract class GameMap {
 		}
 	}
 
+
+	public void shoot() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void move(String s) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
