@@ -40,7 +40,6 @@ public class CentipedeGameMap extends GameMap {
 	}
 		
 
-
 	public CentipedeGameMap() {
 		// TODO Auto-generated constructor stub
 	}

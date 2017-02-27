@@ -1,3 +1,4 @@
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -8,10 +9,10 @@ public class Bullet implements MovingObject, Drawable {
 	public static final int WIDTH = 2;
 	public static final int HEIGHT = 2;
 	protected int bulletSpeed = 3;
-	private boolean hitObj;
 	private Vector location;
 
 	private GameMap gm;
+	public int Wall = 1000;
 	public Bullet(Vector v, GameMap gm){
 		location = v;
 		this.gm = gm;
@@ -21,14 +22,17 @@ public class Bullet implements MovingObject, Drawable {
 
 	@Override
 	public void move() {
-		while(hitObj==false){
-			location.y += bulletSpeed;
-		}
+		if(location.y>0 && location.x<Wall){
+			location.y=location.y-bulletSpeed;//draw(null);
+			}
 		
 	}
 	@Override
 	public void handleCollision(MovingObject m){
-		
+		if(m instanceof Mushroom || m instanceof Spider || m instanceof MovingObject) {
+			bulletSpeed =0;
+		}
+		else return;
 	}
 
 	@Override
@@ -43,20 +47,29 @@ public class Bullet implements MovingObject, Drawable {
 		return location;
 	}
 	
-	@Override
-	public boolean collision(MovingObject r) {
-		// TODO Auto-generated method stub
-		if(r == null) return false;
-		return (getBoundingRect()).intersects(r.getBoundingRect());
-	}
 
 
 	public Rectangle getBoundingRect() {
 		/**
 		 * Gives hitbox
-		 */
+		 */	
 		
 		return new Rectangle(location.x, location.y, WIDTH, HEIGHT);
 	}
 
+
+	
+
+
+	@Override
+	public boolean collision(MovingObject r) {
+		// TODO Auto-generated method stub
+		/**
+		 * Checks if hitbox overlaps with any other hitboxes
+		 */
+		if(r == null) return false;
+		return (getBoundingRect()).intersects(r.getBoundingRect());
+	}
 }
+
+
