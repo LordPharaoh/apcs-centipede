@@ -30,7 +30,9 @@ public class Bullet implements MovingObject, Drawable{
 	
 	@Override
 	public void handleCollision(MovingObject m){
-		if(m instanceof Mushroom || m instanceof Spider || m instanceof MovingObject) bulletSpeed =0;
+		if(m instanceof Mushroom || m instanceof Spider || m instanceof MovingObject) {
+			bulletSpeed =0;
+		}
 		else return;
 	}
 
