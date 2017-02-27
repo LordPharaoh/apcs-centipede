@@ -12,14 +12,15 @@ public class CentipedeGameMap extends GameMap {
 					new Vector(
 							(int)(Math.random() * MovingObjectsGameLauncher.DEFAULT_SIZE), 
 							(int)(Math.random() * MovingObjectsGameLauncher.DEFAULT_SIZE)
-					)
+					),
+					this
 			);
 			add(m);
 		}
 	}
 	public void makeCentipede(int numSegments, int xVal) {
 		for(int i = 0; i < numSegments; i++) {
-			Centipede c = new Centipede(new Vector(xVal, -(i * Centipede.HEIGHT)));
+			Centipede c = new Centipede(new Vector(xVal, -(i * Centipede.HEIGHT)), this);
 			add(c);
 		}
 	}

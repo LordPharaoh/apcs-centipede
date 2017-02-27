@@ -13,11 +13,12 @@ public class Spider implements MovingObject, Drawable{
 	private Vector location;
 	private boolean up;
 	private boolean left;
+	private GameMap gm;
 
-	public Spider (Vector v){
+	public Spider (Vector v, GameMap gm){
 		// TODO
 		location = v;
-
+		this.gm = gm;
 
 	}
 

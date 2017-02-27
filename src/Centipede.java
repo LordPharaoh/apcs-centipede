@@ -15,12 +15,14 @@ public class Centipede implements Drawable, MovingObject {
 	private int nextTurn;
 	//last place you started moving down so you can turn when you hit a body length
 	private int turnY = 0;
+	private GameMap gm;
 	//TODO support scaling
-	public Centipede(Vector v) {
+	public Centipede(Vector v, GameMap gm) {
 		location = v;
 		direction = DOWN;
 		speed = 5;
 		nextTurn = RIGHT;
+		this.gm = gm;
 	}
 	@Override
 	public void move() {
@@ -39,14 +41,14 @@ public class Centipede implements Drawable, MovingObject {
 			case UP:
 				dir = new Vector(0, - scaledSpeed);
 				//if we've been going up for a while torn the other way
-				if(location.y > turnY - HEIGHT){
+				if(location.y > turnY - HEIGHT + speed){
 					changeDirection();
 				}
 				break;
 			case DOWN:
 				dir = new Vector(0, scaledSpeed);
 				//if you went down for a whole body length then turn the other way
-				if(location.y > turnY + HEIGHT){
+				if(location.y > turnY + HEIGHT - speed){
 					changeDirection();
 				}
 				break;
@@ -70,6 +72,7 @@ public class Centipede implements Drawable, MovingObject {
 		changeDirection(nextTurn);
 	}
 	private void changeDirection(int dir) {
+		turnY = location.y;
 		if(dir == UP || dir == DOWN) {
 			nextTurn = (direction == LEFT) ? RIGHT : LEFT;
 		}
@@ -78,7 +81,6 @@ public class Centipede implements Drawable, MovingObject {
 			else nextTurn = DOWN;
 		}
 		direction = dir;
-		turnY = location.y;
 	}
 	
 	@Override
@@ -121,6 +123,9 @@ public class Centipede implements Drawable, MovingObject {
 		 */
 		if(m instanceof Mushroom) {
 			changeDirection(DOWN);
+		}
+		if(m instanceof Bullet) {
+			//gm.remove(this);
 		}
 
 		

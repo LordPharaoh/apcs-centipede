@@ -4,12 +4,14 @@ import java.awt.Rectangle;
 
 public class Mushroom implements MovingObject, Drawable {
 	//TODO actual values
-	public static final int WIDTH = 50;
-	public static final int HEIGHT = 50;
+	public static final int WIDTH = 30;
+	public static final int HEIGHT = 30;
 	private Vector location;
-	public Mushroom(Vector v) {
+	GameMap gm;
+	public Mushroom(Vector v, GameMap gm) {
 		//Make a mushroom
 		location = v;
+		this.gm = gm;
 	}
 
 	@Override
