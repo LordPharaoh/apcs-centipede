@@ -20,6 +20,10 @@ public abstract class GameMap {
 	public abstract void openBackgroundImage();
 	public abstract void tick();
 	public abstract void draw(Graphics g);
+	
+	public void removeObject(MovingObject o){
+		drawers.remove(o);
+	}
 
 	public void addMover(MovingObject go) {
 		movers.add(go);
