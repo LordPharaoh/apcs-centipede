@@ -6,21 +6,40 @@ public class CentipedeGameMap extends GameMap {
 
 	//TODO implement scale
 	public static double scale = 1;
+
 	Player p;
 	
 	public CentipedeGameMap(Dimension dim) {
 		//TODO open with dimensions
-		Mushroom m = new Mushroom(new Vector((int)Math.random()*100, 0));
-		Centipede c = new Centipede(new Vector((int)Math.random()*100, 0));
-		Spider s = new Spider(new Vector(0, 600));
-		Bullet b = new Bullet(new Vector(0,0));
+		makeMushrooms(20);
+		makeCentipede(20, 600);
+		Spider s = new Spider(new Vector(0, 600), this);
 		p = new Player(new Vector(0,0));
-		add(m);
-		add(c);
+
 		add(s);
-		add(b);
 		add(p);
 	}
+
+	public void makeMushrooms(int n) {
+		for(int i = 0; i < n; i++) {
+			Mushroom m = new Mushroom(
+					new Vector(
+							(int)(Math.random() * MovingObjectsGameLauncher.DEFAULT_SIZE), 
+							(int)(Math.random() * MovingObjectsGameLauncher.DEFAULT_SIZE)
+					),
+					this
+			);
+			add(m);
+		}
+	}
+	public void makeCentipede(int numSegments, int xVal) {
+		for(int i = 0; i < numSegments; i++) {
+			Centipede c = new Centipede(new Vector(xVal, -(i * Centipede.HEIGHT)), this);
+			add(c);
+		}
+	}
+		
+
 
 	public CentipedeGameMap() {
 		// TODO Auto-generated constructor stub
@@ -31,12 +50,29 @@ public class CentipedeGameMap extends GameMap {
 		// TODO Open the background image
 
 	}
-
-	@Override
-	public void tick() {
+	
+	public void collisions() {
+		//TODO add box optimization
+		//TODO skip types that don't react? is instanceof more efficient?
+		for(int i = 0; i < movers.size(); i++) {
+			for(int h = i + 1; h < movers.size(); h++) {
+				if(movers.get(i).collision(movers.get(h))) {
+					movers.get(i).handleCollision(movers.get(h));
+					movers.get(h).handleCollision(movers.get(i));
+				}
+			}
+		}
+	}
+	public void moveAll() {
 		for(MovingObject mo : movers) {
 			mo.move();
 		}
+	}
+
+	@Override
+	public void tick() {
+		collisions();
+		moveAll();
 	}
 
 	@Override
@@ -51,7 +87,7 @@ public class CentipedeGameMap extends GameMap {
 	public void shoot() {
 		// TODO Auto-generated method stub
 		Vector v = p.getLocation();
-		Bullet b = new Bullet(v);
+		Bullet b = new Bullet(v, this);
 		add(b);
 	}
 

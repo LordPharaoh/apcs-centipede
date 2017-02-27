@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.MouseInfo;
-
 import javax.swing.AbstractAction;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
@@ -32,7 +31,7 @@ public class MovingObjectsPanel extends JPanel {
 				repaint();// naturally, we want to see the new view
 				
 				//This sketchy stuff requests a mouse location every frame so it repaints
-		        //MouseInfo.getPointerInfo().getLocation().y;
+		        //MouseInfo.getPointerInfo().getLocation();
 			}
 		});
 		t.start();

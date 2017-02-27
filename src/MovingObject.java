@@ -6,6 +6,6 @@ public interface MovingObject {
 	void move();
 	Rectangle getBoundingRect();
 	Vector getLocation();
-	boolean collision(Rectangle r);
+	boolean collision(MovingObject m);
 	void handleCollision(MovingObject m);
 }

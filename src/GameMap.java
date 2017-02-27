@@ -37,6 +37,7 @@ public abstract class GameMap {
 	}
 
 
+
 	public void shoot() {
 		// TODO Auto-generated method stub
 		
@@ -47,5 +48,6 @@ public abstract class GameMap {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }

@@ -9,9 +9,9 @@ import javafx.event.ActionEvent;
 
 public class Player implements MovingObject, Drawable{
 
-	public static final int PLAYER_WIDTH = 100;
-	public static final int PLAYER_HEIGHT = 50;
-	public static final int PLAYER_SPEED = 5;
+	public static final int WIDTH = 100;
+	public static final int HEIGHT = 50;
+	public static final int SPEED = 5;
 	private Vector location;
 	private int x, y;
 	
@@ -32,7 +32,7 @@ public class Player implements MovingObject, Drawable{
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 		g.setColor(new Color(255, 0, 0));
-		g.drawOval(this.location.x, this.location.y, PLAYER_WIDTH, PLAYER_HEIGHT);
+		g.drawOval(this.location.x, this.location.y, WIDTH, HEIGHT);
 		
 	}
 
@@ -43,16 +43,16 @@ public class Player implements MovingObject, Drawable{
 		y = location.y;
 		
 		if (s.equalsIgnoreCase("left")){
-			location = new Vector(x - PLAYER_SPEED, y);
+			location = new Vector(x - SPEED, y);
 		}
 		else if (s.equalsIgnoreCase("right")){
-			location = new Vector(x + PLAYER_SPEED, y);
+			location = new Vector(x + SPEED, y);
 		}
 		else if (s.equalsIgnoreCase("up")){
-			location = new Vector(x, y - PLAYER_SPEED);
+			location = new Vector(x, y - SPEED);
 		}
 		else if (s.equalsIgnoreCase("down")){
-			location = new Vector(x, y + PLAYER_SPEED);
+			location = new Vector(x, y + SPEED);
 		}
 
 	}
@@ -68,11 +68,7 @@ public class Player implements MovingObject, Drawable{
 		return location;
 	}
 
-	@Override
-	public boolean collision(Rectangle r) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 
 	@Override
 	public void handleCollision(MovingObject m) {
@@ -93,6 +89,15 @@ public class Player implements MovingObject, Drawable{
 	public void move() {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+
+
+	@Override
+	public boolean collision(MovingObject m) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	
