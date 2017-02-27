@@ -1,33 +1,30 @@
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
 
-public class Bullet implements MovingObject, Drawable{
+public class Bullet implements MovingObject, Drawable {
 	//TODO actual values
-	private int x, y;
-	public static final int BULLET_WIDTH = 10;
-	public static final int BULLET_HEIGHT = 20;
-	protected int bulletSpeed = 5;
+	public static final int WIDTH = 2;
+	public static final int HEIGHT = 2;
+	protected int bulletSpeed = 3;
 	private Vector location;
+	private GameMap gm;
 	public int Wall = 1000;
-
-	
-	public Bullet(Vector v){
+	public Bullet(Vector v, GameMap gm){
 		location = v;
+		this.gm = gm;
 	}
 	
 
 	@Override
 	public void move() {
-		x = location.x;
-		y = location.y;
-		if(y>0 && y<Wall){
-			y=y-bulletSpeed;//draw(null);
-			location = new Vector(x, y);
+		if(location.y>0 && location.x<Wall){
+			location.y=location.y-bulletSpeed;//draw(null);
 			}
+		
 	}
-	
 	@Override
 	public void handleCollision(MovingObject m){
 		if(m instanceof Mushroom || m instanceof Spider || m instanceof MovingObject) {
@@ -38,31 +35,35 @@ public class Bullet implements MovingObject, Drawable{
 
 	@Override
 	public void draw(Graphics g) {
-		g.setColor(Color.RED);
-		g.fillRoundRect(location.x, location.y, (int)this.BULLET_WIDTH, (int)this.BULLET_HEIGHT, 10, 10);
+		g.setColor(Color.YELLOW);
+		g.fillRoundRect(location.x, location.y, (int)this.WIDTH, (int)this.HEIGHT, 1, 1);
+		
 	}
 	@Override
-	
 	public Vector getLocation() {
 		// TODO Auto-generated method stub
 		return location;
 	}
 	
-	@Override
-	public boolean collision(Rectangle r) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
-
-	public void setLocation(Vector location) {
-	}
-
-
-	@Override
 	public Rectangle getBoundingRect() {
-		// TODO Auto-generated method stub
-		return null;
+		/**
+		 * Gives hitbox
+		 */	
+		
+		return new Rectangle(location.x, location.y, WIDTH, HEIGHT);
 	}
 
+	
+
+
+	@Override
+	public boolean collision(MovingObject r) {
+		// TODO Auto-generated method stub
+		/**
+		 * Checks if hitbox overlaps with any other hitboxes
+		 */
+		if(r == null) return false;
+		return (getBoundingRect()).intersects(r.getBoundingRect());
+	}
 }

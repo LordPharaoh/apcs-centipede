@@ -40,5 +40,4 @@ public abstract class GameMap {
 			movers.add((MovingObject) d);
 		}
 	}
-
 }

@@ -13,11 +13,12 @@ public class Spider implements MovingObject, Drawable{
 	private Vector location;
 	private boolean up;
 	private boolean left;
+	private GameMap gm;
 
-	public Spider (Vector v){
+	public Spider (Vector v, GameMap gm){
 		// TODO
 		location = v;
-
+		this.gm = gm;
 
 	}
 
@@ -61,7 +62,7 @@ public class Spider implements MovingObject, Drawable{
 
 	}
 
-	public boolean collision(Rectangle r) {
+	public boolean collision(MovingObject r) {
 		return false;
 		/**
 		 * returns true if collision occurs

@@ -6,16 +6,15 @@ import javax.swing.JFrame;
 
 
 public class MovingObjectsGameLauncher {
-	public static final int DEFAULT_SIZE = 1000;
+	public static final int DEFAULT_SIZE = 800;
 	public static void main(String[] args) {
+	    System.setProperty("sun.java2d.opengl", "true");
 		JFrame gameFrame = new JFrame();
 		gameFrame.setSize(DEFAULT_SIZE, DEFAULT_SIZE);
-		Map<String,String> environMap= System.getenv();
-		System.out.println(environMap.keySet());
 		
 		//Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		
-		MovingObjectsPanel mop = new MovingObjectsPanel(new Dimension(1000, 1000));
+		MovingObjectsPanel mop = new MovingObjectsPanel(new Dimension(DEFAULT_SIZE, DEFAULT_SIZE));
 		gameFrame.add(mop);
 		gameFrame.pack();
 		gameFrame.setVisible(true);

@@ -9,6 +9,6 @@ public interface MovingObject {
 	Vector getLocation();
 	boolean collision(Rectangle r);
 	void handleCollision(MovingObject m);
-	void draw(Graphics g);
+	boolean collision(MovingObject r);
 	
 }

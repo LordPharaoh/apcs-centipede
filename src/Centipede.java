@@ -15,12 +15,14 @@ public class Centipede implements Drawable, MovingObject {
 	private int nextTurn;
 	//last place you started moving down so you can turn when you hit a body length
 	private int turnY = 0;
+	private GameMap gm;
 	//TODO support scaling
-	public Centipede(Vector v) {
+	public Centipede(Vector v, GameMap gm) {
 		location = v;
 		direction = DOWN;
-		speed = 10;
+		speed = 5;
 		nextTurn = RIGHT;
+		this.gm = gm;
 	}
 	@Override
 	public void move() {
@@ -29,20 +31,24 @@ public class Centipede implements Drawable, MovingObject {
 		 * wall, another Centipede piece, or a Mushroom. When it comes into 
 		 * contact (collides) with one of those it should move down one vertical unit.
 		 */
+		if(location.y < 0) {
+			location = location.add(new Vector(0, speed));
+			return;
+		}
 		Vector dir;
 		int scaledSpeed = speed;
 		switch(direction) {
 			case UP:
 				dir = new Vector(0, - scaledSpeed);
 				//if we've been going up for a while torn the other way
-				if(location.y > turnY - HEIGHT){
+				if(location.y > turnY - HEIGHT + speed){
 					changeDirection();
 				}
 				break;
 			case DOWN:
 				dir = new Vector(0, scaledSpeed);
 				//if you went down for a whole body length then turn the other way
-				if(location.y > turnY + HEIGHT){
+				if(location.y > turnY + HEIGHT - speed){
 					changeDirection();
 				}
 				break;
@@ -58,6 +64,7 @@ public class Centipede implements Drawable, MovingObject {
 				dir = new Vector(0, 0);
 				break;
 		}
+		
 		location = location.add(dir);
 	}
 	
@@ -65,6 +72,7 @@ public class Centipede implements Drawable, MovingObject {
 		changeDirection(nextTurn);
 	}
 	private void changeDirection(int dir) {
+		turnY = location.y;
 		if(dir == UP || dir == DOWN) {
 			nextTurn = (direction == LEFT) ? RIGHT : LEFT;
 		}
@@ -73,7 +81,6 @@ public class Centipede implements Drawable, MovingObject {
 			else nextTurn = DOWN;
 		}
 		direction = dir;
-		turnY = location.y;
 	}
 	
 	@Override
@@ -89,22 +96,20 @@ public class Centipede implements Drawable, MovingObject {
 		/**
 		 * Gives hitbox
 		 */
-		return null;
+		
+		return new Rectangle(location.x, location.y, WIDTH, HEIGHT);
 	}
 	
 	@Override
-	public boolean collision(Rectangle r) {
+	public boolean collision(MovingObject r) {
 		// TODO Auto-generated method stub
 		/**
 		 * Checks if hitbox overlaps with any other hitboxes
 		 */
-	
-		return false;
+		if(r == null) return false;
+		return (getBoundingRect()).intersects(r.getBoundingRect());
 	}
 
-	void handleCollision(Mushroom m) {
-		
-	}
 	@Override
 	public void handleCollision(MovingObject m) {
 		// TODO Auto-generated method stub
@@ -116,6 +121,13 @@ public class Centipede implements Drawable, MovingObject {
 		 * Contact with another Centipede -> Move down 1 Vertical unit + Change Direction
 		 * Contact with Bullet -> Delete section, Spawn Mushroom at location
 		 */
+		if(m instanceof Mushroom) {
+			changeDirection(DOWN);
+		}
+		if(m instanceof Bullet) {
+			//gm.remove(this);
+		}
+
 		
 	}
 
