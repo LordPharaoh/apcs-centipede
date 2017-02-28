@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+
 import javax.imageio.ImageIO;
 import javax.swing.KeyStroke;
 
@@ -24,6 +25,9 @@ public class Player implements MovingObject, Drawable{
 	public Player (Vector v, GameMap gm){
 		// TODO
 		location = v;
+
+		this.gm = gm;
+
 		if(ship == null){
 			try {
 				ship = ImageIO.read(new File("res/ship.png"));
@@ -34,7 +38,7 @@ public class Player implements MovingObject, Drawable{
 
 		}
 		
-		this.gm = gm;
+
 
 
 
@@ -69,8 +73,8 @@ public class Player implements MovingObject, Drawable{
 			}
 		}
 		if (s.equalsIgnoreCase("up")){
-			if (location.y - SPEED <= 600){
-				location.y = 600;
+			if (location.y - SPEED <= MovingObjectsGameLauncher.DEFAULT_SIZE * 2 / 3){
+				location.y = MovingObjectsGameLauncher.DEFAULT_SIZE * 2 / 3;
 			}
 			else{
 				location.y -= SPEED;
@@ -139,5 +143,6 @@ public class Player implements MovingObject, Drawable{
 		Bullet b = new Bullet(new Vector(location.x + WIDTH/2, location.y), gm);
 		gm.add(b);
 	}
+
 
 }

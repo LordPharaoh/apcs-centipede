@@ -14,7 +14,7 @@ public class Spider implements MovingObject, Drawable{
 	//TODO actual values
 	public static final int WIDTH = 50;
 	public static final int HEIGHT = 50;
-	public static final int BOUNDARY = 500;
+	public static final int BOUNDARY = MovingObjectsGameLauncher.DEFAULT_SIZE * 2 / 3;
 	public static final int MOVEX = 4;
 	public static final int MOVEY = 5;
 	private int x, y;
@@ -24,8 +24,9 @@ public class Spider implements MovingObject, Drawable{
 	private static BufferedImage spider;
 
 
-	public Spider (Vector v, GameMap gm){
+	public Spider (Boolean left, Vector v, GameMap gm){
 		// TODO
+		this.left = left;
 		location = v;
 		this.gm = gm;
 		if(spider == null){

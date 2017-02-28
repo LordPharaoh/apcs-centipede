@@ -18,6 +18,7 @@ public class CentipedeGameMap extends GameMap {
 	
 	public CentipedeGameMap(Dimension dim) {
 		//TODO open with dimensions
+
 		level = 1;
 		makeGame(level);
 		p = new Player(new Vector((int)(MovingObjectsGameLauncher.DEFAULT_SIZE * .5), MovingObjectsGameLauncher.DEFAULT_SIZE - 100), this);
@@ -44,11 +45,23 @@ public class CentipedeGameMap extends GameMap {
 			add(c);
 		}
 	}
+	
+	public void makeSpider(){
+		
+		Spider s = new Spider(Math.random() >= .5,
+			new Vector(
+					(int)(Math.random() * MovingObjectsGameLauncher.DEFAULT_SIZE), 
+					(int)(Math.random() * MovingObjectsGameLauncher.DEFAULT_SIZE *2 / 3)
+			),
+			this
+		);
+		add(s);
+	}
 		
 	public void makeGame(int level) {
 		makeMushrooms(50);
 		makeCentipede(level * 20, (int) (Math.random() * MovingObjectsGameLauncher.DEFAULT_SIZE));
-		Spider s = new Spider(new Vector(0, MovingObjectsGameLauncher.DEFAULT_SIZE * 3 / 4), this);
+		Spider s = new Spider(false, new Vector(0, MovingObjectsGameLauncher.DEFAULT_SIZE * 3 / 4), this);
 		add(s);
 	}
 	public CentipedeGameMap() {
