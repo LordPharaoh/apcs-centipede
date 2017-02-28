@@ -14,7 +14,7 @@ public class CentipedeGameMap extends GameMap {
 		makeMushrooms(20);
 		makeCentipede(20, 600);
 		Spider s = new Spider(new Vector(0, MovingObjectsGameLauncher.DEFAULT_SIZE * 3 / 4), this);
-		p = new Player(new Vector((int)(MovingObjectsGameLauncher.DEFAULT_SIZE * .5), MovingObjectsGameLauncher.DEFAULT_SIZE - 100));
+		p = new Player(new Vector((int)(MovingObjectsGameLauncher.DEFAULT_SIZE * .5), MovingObjectsGameLauncher.DEFAULT_SIZE - 100), this);
 		startGame();
 		add(s);
 		add(p);
@@ -63,16 +63,18 @@ public class CentipedeGameMap extends GameMap {
 		}
 	}
 	public void moveAll() {
-		for(MovingObject mo : movers) {
-			mo.move();
+		for(int i = 0; i < movers.size(); i++) {
+			movers.get(i).move();
 		}
 	}
 
 	@Override
 	public void tick() {
+		updateLists();
 		if(gameOver) return;
 		collisions();
 		moveAll();
+		
 	}
 
 	@Override
@@ -83,20 +85,16 @@ public class CentipedeGameMap extends GameMap {
 			return;
 		}
 		// TODO affinetransform to scale with window size
-		for(Drawable d : drawers) {
-			d.draw(g);
+		for(int i = 0; i < drawers.size(); i++) {
+			drawers.get(i).draw(g);
 		}
 	}
 
-	@Override
 	public void shoot() {
 		// TODO Auto-generated method stub
-		Vector v = p.getLocation();
-		Bullet b = new Bullet(new Vector(v.x, v.y), this);
-		add(b);
+		p.shoot();
 	}
 
-	@Override
 	public void move(String s) {
 		p.move(s);
 	}

@@ -8,12 +8,14 @@ public abstract class GameMap {
 
 	protected List<MovingObject> movers;
 	protected List<Drawable> drawers;
+	protected List<Object> toRemove;
 	Image backgroundImage;
 	protected boolean gameOver;
 	
 	public GameMap() {
 		movers = new ArrayList<MovingObject>();
 		drawers = new ArrayList<Drawable>();
+		toRemove = new ArrayList<Object>();
 		openBackgroundImage();
 	}
 
@@ -23,8 +25,15 @@ public abstract class GameMap {
 	public abstract void draw(Graphics g);
 	
 	public void remove(Object m){
-		drawers.remove(m);
-		movers.remove(m);
+		toRemove.add(m);
+	}
+	
+	protected void updateLists() {
+		for (Object m : toRemove) {
+			drawers.remove(m);
+			movers.remove(m);
+		}
+		toRemove.clear();
 	}
 
 	public void addMover(MovingObject go) {
@@ -47,18 +56,6 @@ public abstract class GameMap {
 	}
 	public void gameOver() {
 		gameOver = true;
-	}
-
-
-	public void shoot() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	public void move(String s) {
-		// TODO Auto-generated method stub
-		
 	}
 
 

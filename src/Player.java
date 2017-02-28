@@ -1,5 +1,4 @@
 import java.awt.Color;
-
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
@@ -13,11 +12,19 @@ public class Player implements MovingObject, Drawable{
 	public static final int HEIGHT = 10;
 	public static final int SPEED = 20;
 	private Vector location;
+<<<<<<< HEAD
 
 
 	public Player (Vector v){
+=======
+	private GameMap gm;
+	
+	public Player (Vector v, GameMap gm){
+>>>>>>> 79d57511198bc600c7b3a66c0577d1d7a5042279
 		// TODO
 		location = v;
+		this.gm = gm;
+		
 
 
 
@@ -118,4 +125,16 @@ public class Player implements MovingObject, Drawable{
 
 
 
+<<<<<<< HEAD
+=======
+	public void shoot() {
+		// TODO Auto-generated method stub
+		Bullet b = new Bullet(new Vector(location.x + WIDTH/2, location.y), gm);
+		gm.add(b);
+	}
+
+	
+	
+	
+>>>>>>> 79d57511198bc600c7b3a66c0577d1d7a5042279
 }
