@@ -8,11 +8,10 @@ public class Bullet implements MovingObject, Drawable {
 	//TODO actual values
 	public static final int WIDTH = 5;
 	public static final int HEIGHT = 5;
-	protected int bulletSpeed = 3;
+	protected int bulletSpeed = 10;
 	private Vector location;
 
 	private GameMap gm;
-	public int Wall = 1000;
 	public Bullet(Vector v, GameMap gm){
 		location = v;
 		this.gm = gm;
@@ -21,19 +20,18 @@ public class Bullet implements MovingObject, Drawable {
 
 	@Override
 	public void move() {
-		if(location.y>0 && location.x<Wall){
-			location.y=location.y-bulletSpeed;//draw(null);
+		if(location.y > 0 && location.y < MovingObjectsGameLauncher.DEFAULT_SIZE){
+			location.y = location.y - bulletSpeed;//draw(null);
 		}
-		if(location.y > 0) gm.remove(this);
+		if(location.y < 0) gm.remove(this);
 	}
 	@Override
 	public void handleCollision(MovingObject m){
-		if(!(m instanceof Player)) gm.remove(this);
+		if(!(m instanceof Player || m instanceof Bullet)) gm.remove(this);
 	}
 
 	@Override
 	public void draw(Graphics g) {
-		System.out.println("Bullet drawing at " + location);
 		g.setColor(Color.RED);
 		g.fillRect(location.x, location.y, (int) WIDTH, (int) HEIGHT);
 		

@@ -1,5 +1,4 @@
 import java.awt.Color;
-
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
@@ -13,11 +12,13 @@ public class Player implements MovingObject, Drawable{
 	public static final int HEIGHT = 50;
 	public static final int SPEED = 10;
 	private Vector location;
+	private GameMap gm;
 	
-	
-	public Player (Vector v){
+	public Player (Vector v, GameMap gm){
 		// TODO
 		location = v;
+		this.gm = gm;
+		
 
 		
 		
@@ -92,6 +93,15 @@ public class Player implements MovingObject, Drawable{
 	public boolean collision(MovingObject r) {
 		if(r == null || r.getBoundingRect() == null) return false;
 		return (getBoundingRect()).intersects(r.getBoundingRect());
+	}
+
+
+
+
+	public void shoot() {
+		// TODO Auto-generated method stub
+		Bullet b = new Bullet(new Vector(location.x + WIDTH/2, location.y), gm);
+		gm.add(b);
 	}
 
 	
