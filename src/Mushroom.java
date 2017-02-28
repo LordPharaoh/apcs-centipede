@@ -17,6 +17,8 @@ public class Mushroom implements MovingObject, Drawable {
 	private static BufferedImage mush2;
 	private static BufferedImage mush3;
 	private static BufferedImage mush4;
+	private Bullet lastBullet;
+	private int health = 4;
 	public Mushroom(Vector v, GameMap gm) {
 		//Make a mushroom
 		location = v;
@@ -29,29 +31,29 @@ public class Mushroom implements MovingObject, Drawable {
 				e.printStackTrace();
 			}
 		}
-//		else if(mush2 == null && )
-//			try {
-//				ImageIO.read(new File("mush2.png"));
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		
-//		else if(mush3 == null && )
-//			try {
-//				ImageIO.read(new File("mush3.png"));
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//
-//		else if(mush4 == null && )
-//			try {
-//				ImageIO.read(new File("mush4.png"));
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
+		else if(mush2 == null)
+			try {
+				mush2 = ImageIO.read(new File("res/Mush2.png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		else if(mush3 == null)
+			try {
+				mush3 = ImageIO.read(new File("res/Mush3.png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		else if(mush4 == null)
+			try {
+				mush4 = ImageIO.read(new File("res/Mush4.png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 
 	}
@@ -86,13 +88,38 @@ public class Mushroom implements MovingObject, Drawable {
 	@Override
 	public void handleCollision(MovingObject m) {
 		// TODO Handle collissions, look at chart on github
-		if (m instanceof Bullet) gm.remove(this);
+		if (m instanceof Bullet) {
+			if(lastBullet == null || lastBullet == m) return;
+			lastBullet = (Bullet) m;
+			health--; 
+			if(health < 0) {
+				gm.remove(this);
+			}
+		}
 		if (m instanceof Spider) gm.remove(this);
 		
 	}
 
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage(mush1, this.location.x, this.location.y, WIDTH, HEIGHT, null);
+		switch(health) {
+			case 1:
+				g.drawImage(mush4, this.location.x, this.location.y, WIDTH, HEIGHT, null);
+				break;
+			case 2:
+				g.drawImage(mush3, this.location.x, this.location.y, WIDTH, HEIGHT, null);
+				break;
+
+			case 3:
+				g.drawImage(mush2, this.location.x, this.location.y, WIDTH, HEIGHT, null);
+				break;
+
+			case 4:
+				g.drawImage(mush1, this.location.x, this.location.y, WIDTH, HEIGHT, null);
+				break;
+
+			default:
+
+		}
 	}
 }
