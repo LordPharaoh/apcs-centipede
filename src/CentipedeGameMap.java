@@ -13,7 +13,7 @@ public class CentipedeGameMap extends GameMap {
 		//TODO open with dimensions
 		makeMushrooms(20);
 		makeCentipede(20, 600);
-		Spider s = new Spider(new Vector(0, MovingObjectsGameLauncher.DEFAULT_SIZE * 3 / 4), this);
+		Spider s = new Spider(false, new Vector(0, MovingObjectsGameLauncher.DEFAULT_SIZE * 3 / 4), this);
 		p = new Player(new Vector((int)(MovingObjectsGameLauncher.DEFAULT_SIZE * .5), MovingObjectsGameLauncher.DEFAULT_SIZE - 100), this);
 		startGame();
 		add(s);
@@ -37,6 +37,18 @@ public class CentipedeGameMap extends GameMap {
 			Centipede c = new Centipede(new Vector(xVal, -(i * Centipede.HEIGHT)), this);
 			add(c);
 		}
+	}
+	
+	public void makeSpider(){
+		
+		Spider s = new Spider(Math.random() >= .5,
+			new Vector(
+					(int)(Math.random() * MovingObjectsGameLauncher.DEFAULT_SIZE), 
+					(int)(Math.random() * MovingObjectsGameLauncher.DEFAULT_SIZE *2 / 3)
+			),
+			this
+		);
+		add(s);
 	}
 		
 
