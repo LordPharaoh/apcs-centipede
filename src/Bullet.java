@@ -6,8 +6,8 @@ import java.awt.Rectangle;
 
 public class Bullet implements MovingObject, Drawable {
 	//TODO actual values
-	public static final int WIDTH = 2;
-	public static final int HEIGHT = 2;
+	public static final int WIDTH = 5;
+	public static final int HEIGHT = 5;
 	protected int bulletSpeed = 3;
 	private Vector location;
 
@@ -16,7 +16,6 @@ public class Bullet implements MovingObject, Drawable {
 	public Bullet(Vector v, GameMap gm){
 		location = v;
 		this.gm = gm;
-
 	}
 	
 
@@ -24,21 +23,19 @@ public class Bullet implements MovingObject, Drawable {
 	public void move() {
 		if(location.y>0 && location.x<Wall){
 			location.y=location.y-bulletSpeed;//draw(null);
-			}
-		
+		}
+		if(location.y > 0) gm.remove(this);
 	}
 	@Override
 	public void handleCollision(MovingObject m){
-		if(m instanceof Mushroom || m instanceof Spider || m instanceof MovingObject) {
-			bulletSpeed =0;
-		}
-		else return;
+		if(!(m instanceof Player)) gm.remove(this);
 	}
 
 	@Override
 	public void draw(Graphics g) {
-		g.setColor(Color.YELLOW);
-		g.fillRoundRect(location.x, location.y, (int)this.WIDTH, (int)this.HEIGHT, 1, 1);
+		System.out.println("Bullet drawing at " + location);
+		g.setColor(Color.RED);
+		g.fillRect(location.x, location.y, (int) WIDTH, (int) HEIGHT);
 		
 	}
 	@Override
@@ -67,7 +64,7 @@ public class Bullet implements MovingObject, Drawable {
 		/**
 		 * Checks if hitbox overlaps with any other hitboxes
 		 */
-		if(r == null) return false;
+		if(r == null || r.getBoundingRect() == null) return false;
 		return (getBoundingRect()).intersects(r.getBoundingRect());
 	}
 }

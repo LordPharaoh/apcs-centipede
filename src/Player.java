@@ -1,20 +1,18 @@
 import java.awt.Color;
+
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import javax.swing.KeyStroke;
 
-import javafx.event.ActionEvent;
 
 
 public class Player implements MovingObject, Drawable{
 
 	public static final int WIDTH = 100;
 	public static final int HEIGHT = 50;
-	public static final int SPEED = 5;
+	public static final int SPEED = 10;
 	private Vector location;
-	private int x, y;
-	
 	
 	
 	public Player (Vector v){
@@ -38,21 +36,17 @@ public class Player implements MovingObject, Drawable{
 
 	
 	public void move(String s) {
-		// TODO Auto-generated method stub
-		x = location.x;
-		y = location.y;
-		
 		if (s.equalsIgnoreCase("left")){
-			location = new Vector(x - SPEED, y);
+			location.x -= SPEED;
 		}
 		else if (s.equalsIgnoreCase("right")){
-			location = new Vector(x + SPEED, y);
+			location.x += SPEED;
 		}
 		else if (s.equalsIgnoreCase("up")){
-			location = new Vector(x, y - SPEED);
+			location.y -= SPEED;
 		}
 		else if (s.equalsIgnoreCase("down")){
-			location = new Vector(x, y + SPEED);
+			location.y += SPEED;
 		}
 
 	}
@@ -60,7 +54,7 @@ public class Player implements MovingObject, Drawable{
 	@Override
 	public Rectangle getBoundingRect() {
 		// TODO Auto-generated method stub
-		return null;
+		return new Rectangle(location.x, location.y, WIDTH, HEIGHT);
 	}
 
 	@Override
@@ -95,9 +89,9 @@ public class Player implements MovingObject, Drawable{
 
 
 	@Override
-	public boolean collision(MovingObject m) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean collision(MovingObject r) {
+		if(r == null || r.getBoundingRect() == null) return false;
+		return (getBoundingRect()).intersects(r.getBoundingRect());
 	}
 
 	

@@ -12,6 +12,10 @@ import javax.swing.Timer;
 
 public class MovingObjectsPanel extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	final Dimension defaultDim;// = new Dimension(800,600);
 	public static final int FRAME_RATE = 30;
 	GameMap gm;
@@ -23,6 +27,7 @@ public class MovingObjectsPanel extends JPanel {
 		this.setPreferredSize(defaultDim);
 		//TODO decouple painting and ticking (low priority)
 		gm = new CentipedeGameMap(defaultDim);// let the map know what dim is
+		setUpKeyMappings();
 		t = new Timer(1000/FRAME_RATE, new ActionListener() {// fires off every 10 ms
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -35,6 +40,7 @@ public class MovingObjectsPanel extends JPanel {
 			}
 		});
 		t.start();
+
 		
 	}
 	
@@ -56,6 +62,11 @@ public class MovingObjectsPanel extends JPanel {
 		// is sent...
 			
 		this.getActionMap().put("shoot",new AbstractAction(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -64,6 +75,11 @@ public class MovingObjectsPanel extends JPanel {
 		});
 		
 		this.getActionMap().put("left",new AbstractAction(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -72,6 +88,11 @@ public class MovingObjectsPanel extends JPanel {
 		});
 		
 		this.getActionMap().put("right",new AbstractAction(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -80,6 +101,11 @@ public class MovingObjectsPanel extends JPanel {
 		});
 		
 		this.getActionMap().put("up",new AbstractAction(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -88,6 +114,11 @@ public class MovingObjectsPanel extends JPanel {
 		});
 		
 		this.getActionMap().put("down",new AbstractAction(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub

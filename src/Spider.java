@@ -7,9 +7,9 @@ import java.awt.Rectangle;
 
 public class Spider implements MovingObject, Drawable{
 	//TODO actual values
-	public static final int SPIDER_WIDTH = 100;
-	public static final int SPIDER_HEIGHT = 50;
-	public static final int SPIDER_BOUNDARY = 500;
+	public static final int WIDTH = 100;
+	public static final int HEIGHT = 50;
+	public static final int BOUNDARY = 500;
 	public static final int MOVEX = 4;
 	public static final int MOVEY = 5;
 	private int x, y;
@@ -35,7 +35,7 @@ public class Spider implements MovingObject, Drawable{
 		if(y >= MovingObjectsGameLauncher.DEFAULT_SIZE - 100){
 			changeDirection();
 		}
-		else if(y - MOVEY < SPIDER_BOUNDARY){
+		else if(y - MOVEY < BOUNDARY){
 			changeDirection();
 		}
 		
@@ -82,8 +82,8 @@ public class Spider implements MovingObject, Drawable{
 
 
 	public boolean collision(MovingObject r) {
-
-		return false;
+		if(r == null || r.getBoundingRect() == null) return false;
+		return (getBoundingRect()).intersects(r.getBoundingRect());
 		/**
 		 * returns true if collision occurs
 		 */
@@ -93,11 +93,12 @@ public class Spider implements MovingObject, Drawable{
 
 
 	public Rectangle getBoundingRect() {
-		return null;
 		// TODO Auto-generated method stub
 		/**
 		 * returns hitbox
 		 */
+		return new Rectangle(location.x, location.y, WIDTH, HEIGHT);
+
 	}
 
 	@Override
@@ -113,7 +114,7 @@ public class Spider implements MovingObject, Drawable{
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 		g.setColor(new Color(255, 0, 0));
-		g.drawOval(this.location.x, this.location.y, SPIDER_WIDTH, SPIDER_HEIGHT);
+		g.drawOval(this.location.x, this.location.y, WIDTH, HEIGHT);
 	}
 
 
@@ -121,9 +122,12 @@ public class Spider implements MovingObject, Drawable{
 	@Override
 	public void handleCollision(MovingObject m) {
 		// TODO Auto-generated method stub
-		if (m instanceof Player || m instanceof Bullet){
-			
-			
+		if (m instanceof Bullet){
+			gm.remove(this);
+			//TODO increase score
+		}
+		if (m instanceof Player) {
+			gm.gameOver();
 		}
 		/**
 		 * Hits Mushroom, does nothing, continues to move

@@ -9,6 +9,7 @@ public abstract class GameMap {
 	protected List<MovingObject> movers;
 	protected List<Drawable> drawers;
 	Image backgroundImage;
+	protected boolean gameOver;
 	
 	public GameMap() {
 		movers = new ArrayList<MovingObject>();
@@ -21,7 +22,7 @@ public abstract class GameMap {
 	public abstract void tick();
 	public abstract void draw(Graphics g);
 	
-	public void removeObject(MovingObject m){
+	public void remove(Object m){
 		drawers.remove(m);
 		movers.remove(m);
 	}
@@ -41,6 +42,12 @@ public abstract class GameMap {
 		}
 	}
 
+	public void startGame() {
+		gameOver = false;
+	}
+	public void gameOver() {
+		gameOver = true;
+	}
 
 
 	public void shoot() {

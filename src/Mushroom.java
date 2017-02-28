@@ -31,7 +31,8 @@ public class Mushroom implements MovingObject, Drawable {
 	@Override
 	public boolean collision(MovingObject r) {
 		// TODO Implement, return true if hitboxes overlap
-		if(r == null) return false;
+		if(r == null || r.getBoundingRect() == null) return false;
+		
 		return (new Rectangle(location.x, location.y, WIDTH, HEIGHT)).intersects(r.getBoundingRect());	
 	}
 
@@ -43,6 +44,8 @@ public class Mushroom implements MovingObject, Drawable {
 	@Override
 	public void handleCollision(MovingObject m) {
 		// TODO Handle collissions, look at chart on github
+		if (m instanceof Bullet) gm.remove(this);
+		if (m instanceof Spider) gm.remove(this);
 		
 	}
 

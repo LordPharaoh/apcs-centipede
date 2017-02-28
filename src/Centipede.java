@@ -106,7 +106,7 @@ public class Centipede implements Drawable, MovingObject {
 		/**
 		 * Checks if hitbox overlaps with any other hitboxes
 		 */
-		if(r == null) return false;
+		if(r == null || r.getBoundingRect() == null) return false;
 		return (getBoundingRect()).intersects(r.getBoundingRect());
 	}
 
@@ -121,12 +121,17 @@ public class Centipede implements Drawable, MovingObject {
 		 * Contact with another Centipede -> Move down 1 Vertical unit + Change Direction
 		 * Contact with Bullet -> Delete section, Spawn Mushroom at location
 		 */
-		if(m instanceof Mushroom) {
+		if(m instanceof Mushroom || m instanceof Spider) {
 			changeDirection(DOWN);
 		}
 		if(m instanceof Bullet) {
-			//gm.remove(this);
+			gm.add(new Mushroom(location, gm));
+			gm.remove(this);
 		}
+		if(m instanceof Player) {
+			gm.gameOver();
+		}
+		if(m instanceof Spider) gm.remove(this);
 
 		
 	}
