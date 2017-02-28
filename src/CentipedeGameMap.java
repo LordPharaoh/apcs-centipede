@@ -14,15 +14,15 @@ public class CentipedeGameMap extends GameMap {
 	private static BufferedImage bg;
 
 	Player p;
+	int level;
 	
 	public CentipedeGameMap(Dimension dim) {
 		//TODO open with dimensions
-		makeMushrooms(20);
-		makeCentipede(20, 600);
-		Spider s = new Spider(new Vector(0, MovingObjectsGameLauncher.DEFAULT_SIZE * 3 / 4), this);
+		level = 1;
+		makeGame(level);
 		p = new Player(new Vector((int)(MovingObjectsGameLauncher.DEFAULT_SIZE * .5), MovingObjectsGameLauncher.DEFAULT_SIZE - 100), this);
 		startGame();
-		add(s);
+
 		add(p);
 	}
 
@@ -45,7 +45,12 @@ public class CentipedeGameMap extends GameMap {
 		}
 	}
 		
-
+	public void makeGame(int level) {
+		makeMushrooms(50);
+		makeCentipede(level * 20, (int) (Math.random() * MovingObjectsGameLauncher.DEFAULT_SIZE));
+		Spider s = new Spider(new Vector(0, MovingObjectsGameLauncher.DEFAULT_SIZE * 3 / 4), this);
+		add(s);
+	}
 	public CentipedeGameMap() {
 		// TODO Auto-generated constructor stub
 	}
@@ -79,9 +84,22 @@ public class CentipedeGameMap extends GameMap {
 			movers.get(i).move();
 		}
 	}
+	
+	private int numCentipedes() {
+		int tot = 0;
+		for(int i = 0; i < movers.size(); i++) {
+			if (movers.get(i) instanceof Centipede) tot++;
+		}
+		return tot;
+	}
 
 	@Override
 	public void tick() {
+		if (numCentipedes() == 0){
+			makeGame(level);
+			level++;
+		}
+		
 		updateLists();
 		if(gameOver) return;
 		collisions();
