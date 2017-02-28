@@ -2,6 +2,11 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 
 public class Bullet implements MovingObject, Drawable {
@@ -12,9 +17,19 @@ public class Bullet implements MovingObject, Drawable {
 	private Vector location;
 
 	private GameMap gm;
+	private static BufferedImage bullet;
+
 	public Bullet(Vector v, GameMap gm){
 		location = v;
 		this.gm = gm;
+		/*if(bullet == null){
+			try {
+				ImageIO.read(new File("res/bullet.png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}*/
 	}
 	
 
@@ -32,6 +47,9 @@ public class Bullet implements MovingObject, Drawable {
 
 	@Override
 	public void draw(Graphics g) {
+		
+		//g.drawImage(bullet, this.location.x, this.location.y,WIDTH, HEIGHT, null);
+
 		g.setColor(Color.RED);
 		g.fillRect(location.x, location.y, (int) WIDTH, (int) HEIGHT);
 		

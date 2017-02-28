@@ -1,11 +1,17 @@
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 
 public class CentipedeGameMap extends GameMap {
 
 	//TODO implement scale
 	public static double scale = 1;
+	private static BufferedImage bg;
 
 	Player p;
 	int level;
@@ -64,7 +70,13 @@ public class CentipedeGameMap extends GameMap {
 
 	@Override
 	public void openBackgroundImage() {
-		// TODO Open the background image
+		try {
+			bg = ImageIO.read(new File("res/bg.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 
 	}
 	
@@ -110,7 +122,7 @@ public class CentipedeGameMap extends GameMap {
 
 	@Override
 	public void draw(Graphics g) {
-		//TODO cool gameover background, this looks lame
+		g.drawImage(bg, 0, 0, MovingObjectsGameLauncher.DEFAULT_SIZE, MovingObjectsGameLauncher.DEFAULT_SIZE, null);
 		if(gameOver) {
 			g.drawString("Game Over", MovingObjectsGameLauncher.DEFAULT_SIZE / 2, MovingObjectsGameLauncher.DEFAULT_SIZE / 2);
 			return;

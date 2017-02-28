@@ -2,12 +2,17 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 
 
 public class Spider implements MovingObject, Drawable{
 	//TODO actual values
-	public static final int WIDTH = 100;
+	public static final int WIDTH = 50;
 	public static final int HEIGHT = 50;
 	public static final int BOUNDARY = MovingObjectsGameLauncher.DEFAULT_SIZE * 2 / 3;
 	public static final int MOVEX = 4;
@@ -16,6 +21,7 @@ public class Spider implements MovingObject, Drawable{
 	private Vector location;
 	private boolean up, left;
 	private GameMap gm;
+	private static BufferedImage spider;
 
 
 	public Spider (Boolean left, Vector v, GameMap gm){
@@ -23,7 +29,14 @@ public class Spider implements MovingObject, Drawable{
 		this.left = left;
 		location = v;
 		this.gm = gm;
-
+		if(spider == null){
+			try {
+				spider = ImageIO.read(new File("res/spider.png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 
@@ -113,9 +126,8 @@ public class Spider implements MovingObject, Drawable{
 	@Override
 
 	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
-		g.setColor(new Color(255, 0, 0));
-		g.drawOval(this.location.x, this.location.y, WIDTH, HEIGHT);
+		g.drawImage(spider, this.location.x, this.location.y, WIDTH, HEIGHT, null);
+
 	}
 
 
