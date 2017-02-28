@@ -3,6 +3,11 @@ import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 public class Centipede implements Drawable, MovingObject {
 	//TODO actual values
 	public static final int WIDTH = 50;
@@ -17,12 +22,31 @@ public class Centipede implements Drawable, MovingObject {
 	private int turnY = 0;
 	private GameMap gm;
 	//TODO support scaling
+	private static BufferedImage centHead;
+	private static BufferedImage centBod;
 	public Centipede(Vector v, GameMap gm) {
 		location = v;
 		direction = DOWN;
 		speed = 5;
 		nextTurn = RIGHT;
 		this.gm = gm;
+		if(centHead == null){
+		/*	try {
+				ImageIO.read(new File("res/centHead.png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+		}
+//		else if(centBod == null)
+//			try {
+//				ImageIO.read(new File("centBod.png"));
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+
+
 	}
 	@Override
 	public void move() {
@@ -85,9 +109,8 @@ public class Centipede implements Drawable, MovingObject {
 	
 	@Override
 	public void draw(Graphics g) {
-		//TODO rotate centipede based on directions
-		g.setColor(new Color(0, 255, 0));
-		g.drawOval(this.location.x, this.location.y, WIDTH, HEIGHT);
+		//g.drawImage(centHead, this.location.x, this.location.y, WIDTH, HEIGHT, null);
+
 
 	}
 

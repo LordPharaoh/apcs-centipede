@@ -1,8 +1,11 @@
 import java.awt.Color;
-
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.KeyStroke;
 
 
@@ -13,12 +16,21 @@ public class Player implements MovingObject, Drawable{
 	public static final int HEIGHT = 50;
 	public static final int SPEED = 10;
 	private Vector location;
-	
+	private static BufferedImage ship; 
 	
 	public Player (Vector v){
 		// TODO
 		location = v;
 
+		if(ship == null){
+			try {
+				ship = ImageIO.read(new File("res/ship.png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
 		
 		
 	}
@@ -28,9 +40,8 @@ public class Player implements MovingObject, Drawable{
 	
 	@Override
 	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
-		g.setColor(new Color(255, 0, 0));
-		g.drawOval(this.location.x, this.location.y, WIDTH, HEIGHT);
+		g.drawImage(ship, this.location.x, this.location.y, WIDTH, HEIGHT, null);
+
 		
 	}
 
