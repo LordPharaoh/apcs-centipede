@@ -9,8 +9,8 @@ import javax.imageio.ImageIO;
 
 public class Mushroom implements MovingObject, Drawable {
 	//TODO actual values
-	public static final int WIDTH = 30;
-	public static final int HEIGHT = 30;
+	public static final int WIDTH = 25;
+	public static final int HEIGHT = 25;
 	private Vector location;
 	GameMap gm;
 	private static BufferedImage mush1;

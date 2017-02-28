@@ -70,7 +70,7 @@ public class MovingObjectsPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				gm.shoot();
+				((CentipedeGameMap) gm).shoot();
 			}
 		});
 		
@@ -83,7 +83,7 @@ public class MovingObjectsPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				gm.move("left");
+				((CentipedeGameMap) gm).move("left");
 			}
 		});
 		
@@ -96,7 +96,7 @@ public class MovingObjectsPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				gm.move("right");
+				((CentipedeGameMap) gm).move("right");
 			}
 		});
 		
@@ -109,7 +109,7 @@ public class MovingObjectsPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				gm.move("up");
+				((CentipedeGameMap) gm).move("up");
 			}
 		});
 		
@@ -122,7 +122,7 @@ public class MovingObjectsPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				gm.move("down");
+				((CentipedeGameMap) gm).move("down");
 			}
 		});
 		
