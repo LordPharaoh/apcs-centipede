@@ -12,7 +12,7 @@ public class CentipedeGameMap extends GameMap {
 	//TODO implement scale
 	public static double scale = 1;
 	private static BufferedImage bg;
-
+	private static int MAX_BULLETS = 1;
 	Player p;
 	int level;
 	
@@ -105,7 +105,13 @@ public class CentipedeGameMap extends GameMap {
 		}
 		return tot;
 	}
-
+	private int numBullets() {
+		int tot = 0;
+		for(int i = 0; i < movers.size(); i++) {
+			if (movers.get(i) instanceof Bullet) tot++;
+		}
+		return tot;
+	}
 	@Override
 	public void tick() {
 		if (numCentipedes() == 0){
@@ -135,7 +141,7 @@ public class CentipedeGameMap extends GameMap {
 
 	public void shoot() {
 		// TODO Auto-generated method stub
-		p.shoot();
+		if(numBullets() < MAX_BULLETS) p.shoot();
 	}
 
 	public void move(String s) {

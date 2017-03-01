@@ -10,8 +10,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 public class Centipede implements Drawable, MovingObject {
 	//TODO actual values
-	public static final int WIDTH = 50;
-	public static final int HEIGHT = 50;
+	public static final int WIDTH = 25;
+	public static final int HEIGHT = 25;
 	private static final int UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3;
 	private int speed;
 	public int direction = DOWN;
@@ -31,20 +31,20 @@ public class Centipede implements Drawable, MovingObject {
 		nextTurn = RIGHT;
 		this.gm = gm;
 		if(centHead == null){
-		/*	try {
-				ImageIO.read(new File("res/centHead.png"));
+			try {
+				centHead = ImageIO.read(new File("res/centHead.png"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}*/
+			}
 		}
-//		else if(centBod == null)
-//			try {
-//				ImageIO.read(new File("centBod.png"));
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
+		else if(centBod == null)
+			try {
+				centBod = ImageIO.read(new File("res/centBod.png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 
 	}
@@ -75,6 +75,7 @@ public class Centipede implements Drawable, MovingObject {
 				if(location.y > turnY + HEIGHT - speed){
 					changeDirection();
 				}
+				if(location.y  + HEIGHT > MovingObjectsGameLauncher.DEFAULT_SIZE) changeDirection(UP);
 				break;
 			case LEFT:
 				dir = new Vector(-scaledSpeed, 0);
@@ -109,7 +110,7 @@ public class Centipede implements Drawable, MovingObject {
 	
 	@Override
 	public void draw(Graphics g) {
-		//g.drawImage(centHead, this.location.x, this.location.y, WIDTH, HEIGHT, null);
+		g.drawImage(centHead, this.location.x, this.location.y, WIDTH, HEIGHT, null);
 
 
 	}

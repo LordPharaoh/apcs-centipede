@@ -1,4 +1,6 @@
+
 import java.awt.Graphics;
+
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -17,7 +19,6 @@ public class Mushroom implements MovingObject, Drawable {
 	private static BufferedImage mush2;
 	private static BufferedImage mush3;
 	private static BufferedImage mush4;
-	private Bullet lastBullet;
 	private int health = 4;
 	public Mushroom(Vector v, GameMap gm) {
 		//Make a mushroom
@@ -89,12 +90,11 @@ public class Mushroom implements MovingObject, Drawable {
 	public void handleCollision(MovingObject m) {
 		// TODO Handle collissions, look at chart on github
 		if (m instanceof Bullet) {
-			if(lastBullet == null || lastBullet == m) return;
-			lastBullet = (Bullet) m;
 			health--; 
 			if(health < 0) {
 				gm.remove(this);
 			}
+			System.out.println("Hit, health is now " + health);
 		}
 		if (m instanceof Spider) gm.remove(this);
 		

@@ -12,8 +12,8 @@ import javax.imageio.ImageIO;
 public class Bullet implements MovingObject, Drawable {
 	//TODO actual values
 	public static final int WIDTH = 5;
-	public static final int HEIGHT = 5;
-	protected int bulletSpeed = 10;
+	public static final int HEIGHT = 12;
+	protected int bulletSpeed = 40;
 	private Vector location;
 
 	private GameMap gm;
@@ -24,7 +24,7 @@ public class Bullet implements MovingObject, Drawable {
 		this.gm = gm;
 		/*if(bullet == null){
 			try {
-				ImageIO.read(new File("res/bullet.png"));
+				ImageIO.read(new File()"res/bullet.png"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -35,9 +35,7 @@ public class Bullet implements MovingObject, Drawable {
 
 	@Override
 	public void move() {
-		if(location.y > 0 && location.y < MovingObjectsGameLauncher.DEFAULT_SIZE){
-			location.y = location.y - bulletSpeed;//draw(null);
-		}
+		location.y = location.y - bulletSpeed;//draw(null);
 		if(location.y < 0) gm.remove(this);
 	}
 	@Override
@@ -50,7 +48,7 @@ public class Bullet implements MovingObject, Drawable {
 		
 		//g.drawImage(bullet, this.location.x, this.location.y,WIDTH, HEIGHT, null);
 
-		g.setColor(Color.RED);
+		g.setColor(Color.GREEN);
 		g.fillRect(location.x, location.y, (int) WIDTH, (int) HEIGHT);
 		
 	}
